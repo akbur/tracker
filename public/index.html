@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="budget-tracker">
   <head>
+    <meta charset="utf-8">
+    <title>Budget Tracker</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script src="index.js"></script>
   </head>
   <body>
-    
+
+    <h1>My Expenses</h1>
+     <div id="container" ng-controller='ExpenseController'>
+       <form name="addExpForm" ng-submit="addExpense(expense.name, expense.amount)" novalidate>
+        <input type="text" class="exp-input" ng-model="expense.name" placeholder="Name of expense...">
+        <input type="number" class="exp-input" ng-model="expense.amount" placeholder="Amount...">
+        <button type="submit">Add Expense</button>
+      </form>
+      <ul>
+        <li ng-repeat="expense in expenses">
+          <h3>{{ expense.name }} - {{ expense.amount }}</h3>
+        </li>
+      </ul>
+    </div>
+
   </body>
 </html>
