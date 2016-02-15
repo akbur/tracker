@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var localURI = 'mongodb://127.0.0.1/trackdb';
-var mongoURI = process.env.MONGOLAB_URI || localUri;
+var mongoURI = process.env.MONGOLAB_URI || localURI;
 
 mongoose.connect(mongoURI);
 var db = mongoose.connection;
