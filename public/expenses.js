@@ -6,6 +6,8 @@ angular.module('budget.expenses', [])
   $scope.expense = {};
   $scope.total;
 
+  $scope.income = 0;
+
   //gets updated expenses, then gets new total
   $scope.getExpenses = function(data) {
     Expenses.getExpenses($scope.data)
@@ -26,12 +28,9 @@ angular.module('budget.expenses', [])
     Expenses.deleteExpense(expenseID);
     //update expenses after deletion
     $scope.getExpenses($scope.data);
-  }  
+  };
 
   //get all expenses on load
   $scope.getExpenses($scope.data);
-
-
- 
 
 });

@@ -32,9 +32,9 @@ angular.module('budget.services', [])
       var total = 0;
       for (var i = 0; i < data.expenses.length; i++) {
         total += data.expenses[i].amount;
-      }
+      };
       return total;
-    }
+    };
 
     return {
       getExpenses: getExpenses,
