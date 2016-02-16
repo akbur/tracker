@@ -51,7 +51,7 @@
             <td>{{ $index + 1 }}</td>
             <td>{{ expense.name }}</td>
             <td>{{ expense.amount }}</td>
-            <td><button ng-click="">Remove</button></td>
+            <td><button ng-click="deleteExpense(expense._id)">Remove</button></td>
           </tr>
         </tbody>
         <tfoot>

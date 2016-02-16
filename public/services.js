@@ -8,23 +8,29 @@ angular.module('budget.services', [])
         url: '/api/expenses',
       })
       .then(function(res) {
-        console.log('getExpenses response', res);
         data.expenses = res.data;
       });
     };
 
     var addExpense = function(expense) {
-      console.log('expense', expense);
       return $http({
         method: 'POST', 
         url: '/api/expenses',
         data: expense
-      })
+      });
+    };
+
+    var deleteExpense = function(expenseID) {
+      return $http({
+        method: 'DELETE',
+        url: '/api/expenses/' + expenseID,
+      });
     };
 
     return {
       getExpenses: getExpenses,
-      addExpense: addExpense
+      addExpense: addExpense,
+      deleteExpense: deleteExpense
     }
   });
 

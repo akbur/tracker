@@ -14,6 +14,11 @@ angular.module('budget.expenses', [])
     //clear form and get newly added expense
     $scope.expense = {};
     $scope.getExpenses($scope.data);
-  }
-  
+  };
+
+  $scope.deleteExpense = function(expenseID) {
+    Expenses.deleteExpense(expenseID);
+    //update expenses after deletion
+    $scope.getExpenses($scope.data);
+  }  
 });
