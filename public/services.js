@@ -1,6 +1,7 @@
 angular.module('budget.services', [])
 
   .factory('Expenses', function ($http) {
+
     
     var getExpenses = function(data) {
       return $http({
@@ -27,10 +28,19 @@ angular.module('budget.services', [])
       });
     };
 
+    var totalExpenses = function(data) {
+      var total = 0;
+      for (var i = 0; i < data.expenses.length; i++) {
+        total += data.expenses[i].amount;
+      }
+      return total;
+    }
+
     return {
       getExpenses: getExpenses,
       addExpense: addExpense,
-      deleteExpense: deleteExpense
+      deleteExpense: deleteExpense,
+      totalExpenses: totalExpenses
     }
   });
 

@@ -4,15 +4,21 @@ angular.module('budget.expenses', [])
   angular.extend($scope, Expenses);
   $scope.data = {};
   $scope.expense = {};
+  $scope.total;
 
-  //call to get all expenses on load
-  $scope.getExpenses($scope.data);
+  //gets updated expenses, then gets new total
+  $scope.getExpenses = function(data) {
+    Expenses.getExpenses($scope.data)
+    .then(function() {
+      $scope.total = $scope.totalExpenses($scope.data);
+    });
+  };
 
   $scope.addExpense = function() {
     Expenses.addExpense($scope.expense);
-    
-    //clear form and get newly added expense
+    //clear form 
     $scope.expense = {};
+    // get newly added expense
     $scope.getExpenses($scope.data);
   };
 
@@ -21,4 +27,11 @@ angular.module('budget.expenses', [])
     //update expenses after deletion
     $scope.getExpenses($scope.data);
   }  
+
+  //get all expenses on load
+  $scope.getExpenses($scope.data);
+
+
+ 
+
 });
