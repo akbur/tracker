@@ -9,7 +9,7 @@ angular.module('budget.expenses', [])
   $scope.income = 0;
 
   //gets updated expenses, then gets new total
-  $scope.getExpenses = function(data) {
+  $scope.getExpenses = function() {
     Expenses.getExpenses($scope.data)
     .then(function() {
       $scope.total = $scope.totalExpenses($scope.data);
