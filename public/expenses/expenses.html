@@ -1,0 +1,81 @@
+<div class="container"  ng-controller='ExpenseController'>
+
+      <div class="container">
+
+      <h2>Budget Tracker</h2>
+
+      <!-- BUDGET FORMS -->
+
+        <div class="container">
+          <h4>Add Monthly Income:</h4>
+          <form class="form-inline" name="incomeForm" novalidate>
+            <div class="form-group">
+              <label class="sr-only" for="monthlyIncome">Monthly Income</label>
+              <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input type="text" class="form-control" ng-model="income" id="monthlyIncome" placehold="Income...">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-default">Add Income</button>
+          </form>
+           
+          <h4>Add Monthly Expenses:</h4>
+          <form class="form-inline" name="expForm" ng-submit="addExpense(expense.name, expense.amount)" novalidate>
+            <div class="form-group">
+              <label class="sr-only" for="expenseName">Expense Name</label>
+              <input type="text" class="form-control" ng-model="expense.name" id="expenseName" placeholder="Name...">
+            </div>
+            <div class="form-group">
+              <label class="sr-only" for="expenseAmount">Expense Amount (in dollars)</label>
+              <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input type="text" class="form-control" ng-model="expense.amount" id="expenseAmount" placeholder="Amount...">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-default">Add Expense</button>
+          </form>
+        </div>
+
+        <hr>
+
+        <!--DISPLAY BUDGET TABLE-->  
+
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody ng-repeat="expense in data.expenses">
+            <tr>
+              <td>{{ $index + 1 }}</td>
+              <td>{{ expense.name }}</td>
+              <td>{{ expense.amount }}</td>
+              <td><button type="button" class="btn btn-default btn-xs" ng-click="deleteExpense(expense._id)">Remove</button></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td><b>Total Expenses:</b></td>
+              <td></td>
+              <td>{{ total }}</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><b>Total Income:</b></td>
+              <td></td>
+              <td>{{ income }}</td>
+              <td></td>
+            </tr>
+            <tr ng-class="(income - total < 0) ? 'danger' : 'success'">
+              <td><b>Difference:</b></td>
+              <td></td>
+              <td>{{ income - total }}</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div> 

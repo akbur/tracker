@@ -93,7 +93,7 @@ module.exports = function(app) {
 
   //--APP--
   
-  app.get('/', function(req, res) {
+  app.get('*', function(req, res) {
     res.render('/index');
   });
 
