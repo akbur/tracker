@@ -78,10 +78,15 @@ angular.module('budget.services', [])
       formattedData = [];
       for (var i = 0; i < data.length; i++) {
         formattedData[i] = data[i];
-        var dueDate = formattedData[i].due;
-        dueDate = dueDate.slice(0, 10);
-        dueDate = dueDate.substr(5) + '-' + dueDate.substr(0, 4);
-        formattedData[i].due = dueDate;
+        if (formattedData[i].due) {
+          var dueDate = formattedData[i].due;
+          dueDate = dueDate.slice(0, 10);
+          dueDate = dueDate.substr(5) + '-' + dueDate.substr(0, 4);
+          formattedData[i].due = dueDate;
+        } else {
+          formattedData[i].due = '';
+        }
+       
       }
       return formattedData;
     };
