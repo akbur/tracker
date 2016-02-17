@@ -16,7 +16,7 @@ app.use(morgan('dev'));
 //parse app
 app.use(bodyParser.urlencoded({'extended':'true'}));        
 app.use(bodyParser.json());                             
-app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(methodOverride());
 
 //routes

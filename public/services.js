@@ -44,6 +44,7 @@ angular.module('budget.services', [])
     }
   })
   
+  
   .factory('Bills', function ($http) {
 
     var getBills = function(data) {
@@ -52,8 +53,8 @@ angular.module('budget.services', [])
         url: '/api/bills',
       })
       .then(function(res) {
-        console.log('response', res);
-        data.bills = res.data;
+        var formattedData = formatDates(res.data);
+        data.bills = formattedData;
       });
     };
 
@@ -70,6 +71,19 @@ angular.module('budget.services', [])
         method: 'DELETE',
         url: '/api/bills/' + billID,
       });
+    };
+
+    var formatDates = function(data) {
+      console.log('data', data);
+      formattedData = [];
+      for (var i = 0; i < data.length; i++) {
+        formattedData[i] = data[i];
+        var dueDate = formattedData[i].due;
+        dueDate = dueDate.slice(0, 10);
+        dueDate = dueDate.substr(5) + '-' + dueDate.substr(0, 4);
+        formattedData[i].due = dueDate;
+      }
+      return formattedData;
     };
 
     return {

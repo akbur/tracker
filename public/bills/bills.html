@@ -45,13 +45,13 @@
     <td>{{ bill.name }}</td>
     <td>{{ bill.amount }}</td>
     <td>{{ bill.due }}</td>
-    <td>{{ bill.paid }}
+    <td>{{ bill.paid }}</td>
+    <td>
       <div class="checkbox">
         <label>
           <input type="checkbox">
         </label>
-
-        </div>
+      </div>
     </td>
     <td><button type="button" class="btn btn-default btn-xs" ng-click="deleteBill(bill._id)">Remove</button></td>
   </tr>
