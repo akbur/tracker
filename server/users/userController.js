@@ -9,24 +9,23 @@ var signup = function(req, res) {
     ]
   })
   .then(function(user) {
+    console.log('user', user);
     if (user) {
       return res.status(400).end('User exists');
-    } 
-  })
-  .catch(function(err) {
-    return res.status(400).end(err);
-  });
-  //If user doesn't exist, create a new user
-  User.create({
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email
-  })
-  .then(function(user) {
-    res.json(user);
-  })
-  .catch(function(err) {
-    return res.status(400).end(err);
+    } else {
+      //If user doesn't exist, create a new user
+      User.create({
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email
+      })
+      .then(function(user) {
+        res.json(user);
+      })
+      .catch(function(err) {
+        return res.status(400).end(err);
+      });
+    }
   });
 };
 
