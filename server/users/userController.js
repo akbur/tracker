@@ -1,4 +1,7 @@
 var User = require('./userModel');
+var jwt = require('jwt-simple');
+var moment = require('moment');
+var secret = require('../utils/envDefaults').jwtSecret;
 
 var signup = function(req, res) {
   //Check to see if user with specified username or email exists
@@ -42,8 +45,17 @@ var signin = function(req, res) {
         return res.status(401).end('Invalid Password.');
       }
       //if the password is correct, create a token (session)
-      //TODO
-      res.json('Logged in!');
+      var expires = moment().add(1, 'days').valueOf();
+      var token = jwt.encode({
+        iss: user._id,
+        exp: expires
+      }, secret);
+
+      res.json({
+        token: token,
+        expires: expires,
+        user: user.toJSON()
+      });
     })
     .catch(function(err) {
       return res.status(400).end(err);

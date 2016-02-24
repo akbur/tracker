@@ -1,0 +1,1 @@
+exports.jwtSecret = '3421jlk2lk6j32lk46j2l4k6j2@$%@#$TWErgfdgsd';
