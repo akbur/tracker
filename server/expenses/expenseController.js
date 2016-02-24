@@ -6,7 +6,7 @@ var getExpenses = function(req, res) {
     res.json(expenses);
   })
   .catch(function(err){
-    res.status(400).end(err);
+    return res.status(400).end(err);
   });
 };
 
@@ -22,7 +22,7 @@ var addExpense = function(req, res) {
     });
   })
   .catch(function(err) {
-    res.status(400).end(err);
+    return res.status(400).end(err);
   });
 };
 
@@ -34,7 +34,7 @@ var deleteExpense = function(req, res) {
     res.json(expense);
   })
   .catch(function(err){
-    res.status(400).end(err);
+    return res.status(400).end(err);
   });
 };
 

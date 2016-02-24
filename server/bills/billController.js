@@ -6,7 +6,7 @@ var getBills = function(req, res) {
     res.json(bills);
   })
   .catch(function(err) {
-    res.status(400).end(err);
+    return res.status(400).end(err);
   });
 };
 
@@ -24,7 +24,7 @@ var addBills = function(req, res) {
     });
   })
   .catch(function(err) {
-    res.status(400).end(err);
+    return res.status(400).end(err);
   });
 };
 
@@ -36,7 +36,7 @@ var deleteBill = function(req, res) {
     res.json(bill);
   })
   .catch(function(err) {
-    res.status(400).end(err);
+    return res.status(400).end(err);
   });
 };
 

@@ -10,6 +10,7 @@ var methodOverride = require('method-override');
 var db = require('./dbConfig');
 
 var routes = require('./routes.js');
+var userRoutes = require('./users/userRoutes');
 
 var port = process.env.PORT || 1337;
 
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 //app.use(methodOverride());
 
 app.use('/api', routes);
+app.use('/auth', userRoutes);
 
 app.use(express.static(path.join(__dirname, '../public')));
 
