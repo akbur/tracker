@@ -9,7 +9,6 @@ var signup = function(req, res) {
     ]
   })
   .then(function(user) {
-    console.log('user', user);
     if (user) {
       return res.status(400).end('User exists');
     } else {
@@ -30,7 +29,26 @@ var signup = function(req, res) {
 };
 
 var signin = function(req, res) {
-
+  User.findOne({username: req.body.username})
+  .then(function(user) {
+    //Check to see if the user exists
+    if (!user) {
+      return res.status(401).end('User not found.');
+    }
+    //check the users password
+    return user.comparePassword(req.body.password)
+    .then(function(isMatch) {
+      if (!isMatch) {
+        return res.status(401).end('Invalid Password.');
+      }
+      //if the password is correct, create a token (session)
+      //TODO
+      res.json('Logged in!');
+    })
+    .catch(function(err) {
+      return res.status(400).end(err);
+    });
+  });
 };
 
 var getUsers = function(req, res) {
