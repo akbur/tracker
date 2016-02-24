@@ -1,11 +1,12 @@
 var Expense = require('./expenseModel');
 
 var getExpenses = function(req, res) {
-  Expense.find(function (err, expenses) {
-    if (err) {
-      res.send(err);
-    }
+  Expense.find()
+  .then(function(expenses) {
     res.json(expenses);
+  })
+  .catch(function(err){
+    res.status(400).end(err);
   });
 };
 
@@ -13,26 +14,27 @@ var addExpense = function(req, res) {
   Expense.create({
     name: req.body.name,
     amount: req.body.amount
-  }, function (err, expense) {
-    if (err) {
-      res.send(err);
-    }
-    Expense.find(function (err, expenses) {
-      if (err) {
-        res.send(err);
-      }
-      res.json(expenses); 
+  })
+  .then(function() {
+    Expense.find()
+    .then(function(expenses){
+      res.json(expenses);
     });
+  })
+  .catch(function(err) {
+    res.status(400).end(err);
   });
 };
 
 var deleteExpense = function(req, res) {
   Expense.remove({
     _id: req.params.expense_id
-  }, function (err, expense) {
-    if (err) {
-      res.send(err);
-    }
+  })
+  .then(function(expense) {
+    res.json(expense);
+  })
+  .catch(function(err){
+    res.status(400).end(err);
   });
 };
 

@@ -1,11 +1,12 @@
 var Bill = require('./billModel');
 
 var getBills = function(req, res) {
-  Bill.find(function (err, bills) {
-    if (err) {
-      res.send(err);
-    }
+  Bill.find()
+  .then(function(bills) {
     res.json(bills);
+  })
+  .catch(function(err) {
+    res.status(400).end(err);
   });
 };
 
@@ -15,26 +16,27 @@ var addBills = function(req, res) {
     amount: req.body.amount,
     due: req.body.due,
     paid: req.body.paid,
-  }, function (err, bill) {
-    if (err) {
-      res.send(err);
-    }
-    Bill.find(function (err, bills) {
-      if (err) {
-        res.send(err);
-      }
-      res.json(bills); 
+  })
+  .then(function(){
+    Bill.find()
+    .then(function(bills){
+      res.json(bills);
     });
+  })
+  .catch(function(err) {
+    res.status(400).end(err);
   });
 };
 
 var deleteBill = function(req, res) {
   Bill.remove({
     _id: req.params.bill_id
-  }, function (err, bill) {
-    if (err) {
-      res.send(err);
-    }
+  })
+  .then(function(bill) {
+    res.json(bill);
+  })
+  .catch(function(err) {
+    res.status(400).end(err);
   });
 };
 
