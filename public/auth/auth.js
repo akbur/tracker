@@ -6,9 +6,11 @@ angular.module('budget.auth', [])
    $scope.signin = function () {
     console.log($scope.user);
      Auth.signin($scope.user)
-       .then(function (token) {
-        console.log('token', token);
-         $window.localStorage.setItem('jwt', token);
+       .then(function (res) {
+          console.log(res);
+          console.log($scope.user.username);
+         $window.localStorage.setItem('jwt', res);
+         $window.localStorage.setItem('username', $scope.user.username);
          //$location.path('/bills');
        })
        .catch(function (error) {

@@ -50,7 +50,7 @@ var signin = function(req, res) {
         iss: user._id,
         exp: expires
       }, secret);
-
+      console.log('server token', token);
       res.json({
         token: token,
         expires: expires,

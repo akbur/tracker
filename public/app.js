@@ -36,7 +36,7 @@ var app = angular.module('budget', [
 .factory('AttachTokens', function($window) {
   var attach = {
     request: function(object) {
-      var jwt = $window.localStorage.getItem('com.budget');
+      var jwt = $window.localStorage.getItem('jwt');
       if (jwt) {
         object.headers['x-access-token'] = jwt;
       }

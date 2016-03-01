@@ -22,7 +22,6 @@ app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(bodyParser.json());   
 app.use(methodOverride());
 
-//app.use('/api', routes);
 app.use('/api', auth, routes);
 app.use('/auth', userRoutes);
 

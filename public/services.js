@@ -7,8 +7,7 @@ angular.module('budget.services', [])
 
       return $http({
         method: 'GET', 
-        url: '/api/expenses',
-        headers: {'x-access-token': token}
+        url: '/api/expenses'
       })
       .then(function(res) {
         data.expenses = res.data;
@@ -19,7 +18,6 @@ angular.module('budget.services', [])
       return $http({
         method: 'POST', 
         url: '/api/expenses',
-        headers: {'x-access-token': token},
         data: expense
       });
     };
@@ -28,7 +26,6 @@ angular.module('budget.services', [])
       return $http({
         method: 'DELETE',
         url: '/api/expenses/' + expenseID,
-        headers: {'x-access-token': token},
       });
     };
 
@@ -56,7 +53,6 @@ angular.module('budget.services', [])
       return $http({
         method: 'GET', 
         url: '/api/bills',
-        headers: {'x-access-token': token},
       })
       .then(function(res) {
         var formattedData = formatDates(res.data);
@@ -68,7 +64,6 @@ angular.module('budget.services', [])
       return $http({
         method: 'POST', 
         url: '/api/bills',
-        headers: {'x-access-token': token},
         data: bill
       });
     };
@@ -76,8 +71,7 @@ angular.module('budget.services', [])
     var deleteBill = function(billID) {
       return $http({
         method: 'DELETE',
-        url: '/api/bills/' + billID,
-        headers: {'x-access-token': token}
+        url: '/api/bills/' + billID
       });
     };
 
