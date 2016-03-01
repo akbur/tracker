@@ -6,8 +6,6 @@ angular.module('budget.expenses', [])
   $scope.expense = {};
   $scope.total;
 
-  $scope.income = 0;
-
   //gets updated expenses, then gets new total
   $scope.getExpenses = function() {
     Expenses.getExpenses($scope.data)
@@ -30,7 +28,16 @@ angular.module('budget.expenses', [])
     $scope.getExpenses($scope.data);
   };
 
-  //get all expenses on load
-  $scope.getExpenses($scope.data);
+  $scope.addIncome = function() {
+    Expenses.addIncome($scope.data.income);
+  };
+
+  $scope.getIncome = function() {
+    Expenses.getIncome($scope.data);
+  };
+
+  //get all expenses & income on load
+  $scope.getExpenses();
+  $scope.getIncome();
 
 });

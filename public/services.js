@@ -1,10 +1,9 @@
 angular.module('budget.services', [])
 
-  .factory('Expenses', function ($http) {
+  .factory('Expenses', function ($http, $window) {
     var token = window.localStorage.jwt;
 
     var getExpenses = function(data) {
-
       return $http({
         method: 'GET', 
         url: '/api/expenses'
@@ -37,12 +36,48 @@ angular.module('budget.services', [])
       return total;
     };
 
+    var addIncome = function(income) {
+      var username = $window.localStorage.username;
+      var send = {
+        income: income,
+        username: username
+      }
+      return $http({
+        method: 'PUT',
+        url: 'api/income/' + username,
+        data: send
+      })
+      .then(function(res) {
+        console.log(res);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    };
+
+    var getIncome = function(data) {
+      var username = $window.localStorage.username;
+      return $http({
+        method: 'GET',
+        url: 'api/income/' + username,
+      })
+      .then(function(user) {
+        console.log('user', user.data.income);
+        return data.income = user.data.income;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    };
+
     return {
       getExpenses: getExpenses,
       addExpense: addExpense,
       deleteExpense: deleteExpense,
-      totalExpenses: totalExpenses
-    }
+      totalExpenses: totalExpenses,
+      addIncome: addIncome,
+      getIncome: getIncome
+    };
   })
   
   

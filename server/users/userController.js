@@ -83,11 +83,11 @@ var removeUser = function(req, res) {
   .catch(function(err) {
     return res.status(400).end(err);
   });
-}
+};
 
 module.exports = {
   signin: signin,
   signup: signup,
   getUsers: getUsers,
-  removeUser: removeUser
+  removeUser: removeUser,
 };
