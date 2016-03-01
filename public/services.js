@@ -1,12 +1,14 @@
 angular.module('budget.services', [])
 
   .factory('Expenses', function ($http) {
+    var token = window.localStorage.jwt;
 
-    
     var getExpenses = function(data) {
+
       return $http({
         method: 'GET', 
         url: '/api/expenses',
+        headers: {'x-access-token': token}
       })
       .then(function(res) {
         data.expenses = res.data;
@@ -17,6 +19,7 @@ angular.module('budget.services', [])
       return $http({
         method: 'POST', 
         url: '/api/expenses',
+        headers: {'x-access-token': token},
         data: expense
       });
     };
@@ -25,6 +28,7 @@ angular.module('budget.services', [])
       return $http({
         method: 'DELETE',
         url: '/api/expenses/' + expenseID,
+        headers: {'x-access-token': token},
       });
     };
 
@@ -46,11 +50,13 @@ angular.module('budget.services', [])
   
   
   .factory('Bills', function ($http) {
+    var token = window.localStorage.jwt;
 
     var getBills = function(data) {
       return $http({
         method: 'GET', 
         url: '/api/bills',
+        headers: {'x-access-token': token},
       })
       .then(function(res) {
         var formattedData = formatDates(res.data);
@@ -62,6 +68,7 @@ angular.module('budget.services', [])
       return $http({
         method: 'POST', 
         url: '/api/bills',
+        headers: {'x-access-token': token},
         data: bill
       });
     };
@@ -70,6 +77,7 @@ angular.module('budget.services', [])
       return $http({
         method: 'DELETE',
         url: '/api/bills/' + billID,
+        headers: {'x-access-token': token}
       });
     };
 
@@ -96,7 +104,47 @@ angular.module('budget.services', [])
       addBill: addBill,
       deleteBill: deleteBill
     };
-  });
+  })
+  .factory('Auth', function($http, $location, $window) {
+      var signin = function (user) {
+        return $http({
+          method: 'POST',
+          url: '/auth/signin',
+          data: user
+        })
+        .then(function (resp) {
+          return resp.data.token;
+        });
+      };
+
+      var signup = function (user) {
+        return $http({
+          method: 'POST',
+          url: '/auth/signup',
+          data: user
+        })
+        .then(function (resp) {
+          return resp.data.token;
+        });
+      };
+
+      var isAuth = function () {
+        return !!$window.localStorage.getItem('com.budget');
+      };
+
+      var signout = function () {
+        $window.localStorage.removeItem('com.budget');
+        $location.path('/signin');
+      };
+
+
+      return {
+        signin: signin,
+        signup: signup,
+        isAuth: isAuth,
+        signout: signout
+      };
+    });
 
 
 
